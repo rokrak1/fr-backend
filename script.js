@@ -40,6 +40,8 @@ app.put('/image', increment.handleIncrement(db))
 //Getting profile
 app.get('/profile/:id', profile.handleProfile(db))
 
+//Handle api call
+app.post('/imageUrl', increment.handleApiCall())
 
 
 

@@ -1,3 +1,20 @@
+const Clarifai = require('clarifai');
+
+//You need to sign into your Clarifai account to get an APIKey
+const app = new Clarifai.App({
+ apiKey: 'YOUR_API_KEY'
+});
+
+const handleApiCall = () => (req, res) => {
+	app.models
+	.predict(Clarifai.FACE_DETECT_MODEL, req.body.input)
+	.then(data => {
+		res.json(data);
+	})
+	.catch(err => res.status(400).json('Problems with api...'))
+}
+
+
 const handleIncrement = (db) => (req,res) =>{
 	const {id} = req.body;
 	db('users')
@@ -10,5 +27,6 @@ const handleIncrement = (db) => (req,res) =>{
 	.catch(err => res.status(400).json('Unable to get entries...'))
 }
 module.exports = {
-	handleIncrement:handleIncrement
+	handleIncrement,
+	handleApiCall
 }
